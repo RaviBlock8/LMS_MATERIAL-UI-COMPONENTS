@@ -13,7 +13,6 @@ import {
   Paper
 } from "@material-ui/core/";
 import LeaveTableRow from "./LeaveTableRow";
-
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";

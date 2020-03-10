@@ -60,7 +60,7 @@ export default function Sidebar2(props) {
           </ListItemIcon>
           <ListItemText primary="Leave Approval" />
         </LmsListItem>
-        <Divider />
+        {true?<><Divider />
         <LmsListItem
           button
           selected={selectedIndex === 3}
@@ -84,7 +84,7 @@ export default function Sidebar2(props) {
             </Icon>
           </ListItemIcon>
           <ListItemText primary="Leave Management" />
-        </LmsListItem>
+        </LmsListItem></>:''}
       </Sidebar>
     </div>
   );

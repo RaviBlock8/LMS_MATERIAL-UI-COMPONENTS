@@ -2,6 +2,7 @@ import React from "react";
 import {
     TableCell,
     TableRow,
+    Link
   } from "@material-ui/core/";
 import EditIcon from '@material-ui/icons/Edit';
 const LeaveTableRow = (props) => {
@@ -13,7 +14,7 @@ const LeaveTableRow = (props) => {
       <TableCell align="right">{props.row.from}</TableCell>
       <TableCell align="right">{props.row.to}</TableCell>
       <TableCell align="right">{props.row.status}</TableCell>
-      <TableCell align="right"><EditIcon/></TableCell>
+      <TableCell align="right"><Link style={{cursor:"pointer"}}><EditIcon/></Link></TableCell>
     </TableRow>
   );
 };

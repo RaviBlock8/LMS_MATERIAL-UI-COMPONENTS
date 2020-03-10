@@ -7,6 +7,7 @@ import LeaveTable from '../../components/LeaveTable/LeaveTable'
 export default function EmpDashboard() {
   return (
     <div style={{height:"90vh",boxSizing:"border-box",padding:"5px"}}>
+      {/*spacing here adjusts margin between 2 rows which by default is 8px*/}
       <Grid container  spacing={2}>
           
           <Grid item xs={6}>

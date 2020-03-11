@@ -12,7 +12,7 @@ import {
   TableRow,
   Paper
 } from "@material-ui/core/";
-import LeaveTableRow from "./LeaveTableRow";
+import PendingTableRow from "./PendingTableRow";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -116,7 +116,7 @@ const useStyles2 = makeStyles({
   }
 });
 
-export default function CustomPaginationActionsTable() {
+const PendingTable=()=>{
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(3);
 
@@ -141,8 +141,7 @@ export default function CustomPaginationActionsTable() {
             <CustomHeaderCell align="right">From Date</CustomHeaderCell>
             <CustomHeaderCell align="right">To Date</CustomHeaderCell>
             <CustomHeaderCell align="right">No. of Days</CustomHeaderCell>
-            <CustomHeaderCell align="right">Status</CustomHeaderCell>
-            <CustomHeaderCell align="right">Edit</CustomHeaderCell>
+            <CustomHeaderCell align="center">Action</CustomHeaderCell>
           </TableRow>
         </CustomHeader>
         <TableBody>
@@ -150,7 +149,7 @@ export default function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map(row => (
-            <LeaveTableRow key={rows.indexOf(row)} row={row}/>
+            <PendingTableRow key={rows.indexOf(row)} row={row}/>
           ))}
 
           {emptyRows > 0 && (
@@ -182,11 +181,16 @@ export default function CustomPaginationActionsTable() {
   );
 }
 
+export default PendingTable
+
 const CustomHeader = styled(TableHead)(({ theme }) => ({
   background: theme.palette.primary.light
 }));
 
 const CustomHeaderCell = styled(TableCell)(({ theme }) => ({
   color:"white",
-  fontWeight:"bold"
+  fontWeight:"bold",
+  padding:"0.5rem"
 }));
+
+

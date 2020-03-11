@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
+import {Grid,Paper} from "@material-ui/core/";
 import Charts from "../../components/Charts/Charts"
 import LeaveList from '../../components/LeaveList/LeaveList'
 import LeaveTable from '../../components/LeaveTable/LeaveTable'
@@ -12,6 +12,9 @@ export default function EmpDashboard() {
           
           <Grid item xs={6}>
             <LeaveList/>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper align="center">Bar Graph</Paper>
           </Grid>
           <Grid item xs={12}>
             <LeaveTable/>

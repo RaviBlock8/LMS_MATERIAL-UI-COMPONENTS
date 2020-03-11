@@ -13,6 +13,7 @@ const LeaveTableRow = (props) => {
       </TableCell>
       <TableCell align="right">{props.row.from}</TableCell>
       <TableCell align="right">{props.row.to}</TableCell>
+      <TableCell align="right">{props.row.noofdays}</TableCell>
       <TableCell align="right">{props.row.status}</TableCell>
       <TableCell align="right"><Link style={{cursor:"pointer"}}><EditIcon/></Link></TableCell>
     </TableRow>

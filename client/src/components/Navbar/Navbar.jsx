@@ -1,15 +1,18 @@
 import React from "react";
-import {styled } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import { styled } from "@material-ui/core/styles";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+  Menu,
+  Box
+} from "@material-ui/core/";
+
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 
-
-const Navbar=()=>{
+const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleMenu = event => {
@@ -29,11 +32,15 @@ const Navbar=()=>{
               src={require("./block8-logo-fullcolor-ondarkbackground.png")}
             />
           </div>
-          <div style={{textAlign:"center"}}>
-            <Typography  style={{ textAlign: "left" }}> <b>LMS|ADMIN</b></Typography>
+          <div style={{ textAlign: "center" }}>
+            <Typography style={{ textAlign: "left" }}>
+              {" "}
+              <b>LMS|ADMIN</b>
+            </Typography>
           </div>
 
           <div>
+          <Box component="span" fontSize="0.9rem" fontFamily="Helvetica">Ravi verma </Box>
             <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -43,6 +50,7 @@ const Navbar=()=>{
             >
               <AccountCircle />
             </IconButton>
+            
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -65,21 +73,20 @@ const Navbar=()=>{
       </LMSAppBar>
     </div>
   );
-}
+};
 
 let LMSToolbar = styled(Toolbar)({
-    display: "grid",
-    width: "100vw",
-    height:"10vh",
-    boxSizing: "border-box",
-    gridTemplateColumns: "18vw 72vw 10vw"
-  });
-  
-  let LMSAppBar = styled(AppBar)({
-    padding: "0px",
-    width: "100vw",
-    boxSizing: "border-box"
-  });
-  
+  display: "grid",
+  width: "100vw",
+  height: "10vh",
+  boxSizing: "border-box",
+  gridTemplateColumns: "18vw 70vw 12vw"
+});
 
-export default Navbar
+let LMSAppBar = styled(AppBar)({
+  padding: "0px",
+  width: "100vw",
+  boxSizing: "border-box"
+});
+
+export default Navbar;

@@ -5,6 +5,7 @@ import EmpDashboard from "./pages/EmpDashboard/EmpDashboard";
 import LeaveApproval from './pages/LeaveApproval/LeaveApproval'
 import Grid from "@material-ui/core/Grid";
 import Login from './pages/Login/Login'
+import ApplyLeave from "./pages/ApplyLeave/ApplyLeave"
 
 import "./App.css";
 
@@ -15,7 +16,8 @@ function App() {
       <div id="main">
         <Sidebar2/>
         {/* <EmpDashboard/> */}
-        <LeaveApproval/>
+        {/* <LeaveApproval/> */}
+        <ApplyLeave/>
       </div>
       {/* <Login/> */}
     </div>

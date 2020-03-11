@@ -19,9 +19,7 @@ const PendingTableRow = props => {
   );
 };
 
-const CustomTableCell = styled(TableCell)(({ theme }) => ({
-  padding: "1rem"
-}));
+
 
 const AcceptButton = styled(Button)(({ theme }) => ({
   padding: "0.4rem",

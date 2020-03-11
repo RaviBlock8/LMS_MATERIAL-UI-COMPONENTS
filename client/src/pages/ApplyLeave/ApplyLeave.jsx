@@ -13,13 +13,30 @@ import {
   Box,
   Button
 } from "@material-ui/core/";
+import MomentUtils from "@date-io/moment";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 import { styled } from "@material-ui/core/styles";
 
 const ApplyLeave = () => {
   const [leaveType, setLeaveType] = useState("");
+  const [dayType, setDayType] = useState("");
   const inputLabel = useRef(null);
   const handleTypeChange = event => {
     setLeaveType(event.target.value);
+  };
+  const handleDayChange = event => {
+    setDayType(event.target.value);
+  };
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(fromDate);
+  const handleFromDateChange = date => {
+    setFromDate(date);
+  };
+  const handleToDateChange = date => {
+    setToDate(date);
   };
   return (
     <div style={{ height: "90vh", boxSizing: "border-box", padding: "5px" }}>
@@ -30,29 +47,57 @@ const ApplyLeave = () => {
               <Grid item xs={3}>
                 <FormLabel>Leave Date</FormLabel>
               </Grid>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={3}></Grid>
+              <Grid item xs={3}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="from-date"
+                    label="From Date"
+                    format="DD/MM/YYYY"
+                    value={fromDate}
+                    onChange={handleFromDateChange}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date"
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
+              <Grid item xs={3}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="to-date"
+                    label="To Date"
+                    format="DD/MM/YYYY"
+                    value={toDate}
+                    onChange={handleToDateChange}
+                    minDate={fromDate}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date"
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
               <Grid item xs={3}>
                 <FormControl variant="outlined" style={{ width: "100%" }}>
                   <InputLabel
                     ref={inputLabel}
-                    id="demo-simple-select-outlined-label"
+                    id="dday-label"
                   >
-                    Leave Type
+                    Day
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={leaveType}
-                    onChange={handleTypeChange}
+                    id="day-type"
+                    value={dayType}
+                    onChange={handleDayChange}
                     labelWidth={"100%"}
                   >
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Sick"}>Sick</MenuItem>
-                    <MenuItem value={"Casual"}>Casual</MenuItem>
-                    <MenuItem value={"Paid"}>Paid</MenuItem>
+                    <MenuItem value={"Half"}>Half Day</MenuItem>
+                    <MenuItem value={"Full"}>Full Day</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -63,13 +108,13 @@ const ApplyLeave = () => {
                 <FormControl variant="outlined" style={{ width: "100%" }}>
                   <InputLabel
                     ref={inputLabel}
-                    id="demo-simple-select-outlined-label"
+                    id="leave-type-label"
                   >
                     Leave Type
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
+                    id="select-leave-type"
                     value={leaveType}
                     onChange={handleTypeChange}
                     labelWidth={"100%"}
@@ -89,12 +134,13 @@ const ApplyLeave = () => {
               </Grid>
               <Grid item xs={9}>
                 <TextField
-                  id="outlined-multiline-static"
-                  label="Multiline"
+                  id="description"
+                  label="Description"
                   multiline
                   rows="4"
-                  defaultValue="Default Value"
+                  placeholder="Enter description..."
                   variant="outlined"
+                  required
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -114,13 +160,11 @@ const ApplyLeave = () => {
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} align="center" style={{paddingTop:"50px"}}>
+            <Grid item xs={12} align="center" style={{ paddingTop: "50px" }}>
               <Button variant="contained" color="primary">
                 Submit
               </Button>
-              <CancelButton variant="contained" >
-                Cancel
-              </CancelButton>
+              <CancelButton variant="contained">Cancel</CancelButton>
             </Grid>
           </form>
         </Paper>
@@ -136,9 +180,9 @@ const WarningBox = styled(Box)(({ theme }) => ({
 }));
 
 const CancelButton = styled(Button)(({ theme }) => ({
-    background:theme.palette.primary.light,
-    color:"white",
-    marginLeft:"10px"
-  }));
+  background: theme.palette.primary.light,
+  color: "white",
+  marginLeft: "10px"
+}));
 
 export default ApplyLeave;

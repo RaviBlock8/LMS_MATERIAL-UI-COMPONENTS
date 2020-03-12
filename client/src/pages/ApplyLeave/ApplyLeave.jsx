@@ -11,8 +11,10 @@ import {
   TextField,
   Input,
   Box,
-  Button
+  Button,
+  Snackbar
 } from "@material-ui/core/";
+import MuiAlert from "@material-ui/lab/Alert";
 import MomentUtils from "@date-io/moment";
 import {
   MuiPickersUtilsProvider,
@@ -20,10 +22,15 @@ import {
 } from "@material-ui/pickers";
 import { styled } from "@material-ui/core/styles";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const ApplyLeave = () => {
   const [leaveType, setLeaveType] = useState("");
   const [dayType, setDayType] = useState("");
   const inputLabel = useRef(null);
+  const [Snackopen, setSnackOpen] = useState(false);
   const handleTypeChange = event => {
     setLeaveType(event.target.value);
   };
@@ -34,6 +41,12 @@ const ApplyLeave = () => {
   const [toDate, setToDate] = useState(fromDate);
   const handleFromDateChange = date => {
     setFromDate(date);
+  };
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
   };
   const handleToDateChange = date => {
     setToDate(date);
@@ -80,10 +93,7 @@ const ApplyLeave = () => {
               </Grid>
               <Grid item xs={3}>
                 <FormControl variant="outlined" style={{ width: "100%" }}>
-                  <InputLabel
-                    ref={inputLabel}
-                    id="dday-label"
-                  >
+                  <InputLabel ref={inputLabel} id="dday-label">
                     Day
                   </InputLabel>
                   <Select
@@ -106,10 +116,7 @@ const ApplyLeave = () => {
               </Grid>
               <Grid item xs={6}>
                 <FormControl variant="outlined" style={{ width: "100%" }}>
-                  <InputLabel
-                    ref={inputLabel}
-                    id="leave-type-label"
-                  >
+                  <InputLabel ref={inputLabel} id="leave-type-label">
                     Leave Type
                   </InputLabel>
                   <Select
@@ -161,13 +168,22 @@ const ApplyLeave = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} align="center" style={{ paddingTop: "50px" }}>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={()=>{setSnackOpen(true)}}>
                 Submit
               </Button>
               <CancelButton variant="contained">Cancel</CancelButton>
             </Grid>
           </form>
         </Paper>
+        <Snackbar
+          open={Snackopen}
+          autoHideDuration={6000}
+          onClose={handleSnackClose}
+        >
+          <Alert onClose={handleSnackClose} severity="success">
+            Leave Applied
+          </Alert>
+        </Snackbar>
       </Container>
     </div>
   );

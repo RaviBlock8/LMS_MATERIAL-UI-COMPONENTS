@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useRef}from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -56,6 +56,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const handleSubmit=(event)=>{
+    event.preventDefault()
+    let {email,password}=event.currentTarget.elements
+    console.log(email.value)
+    console.log(password.value)
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -71,7 +77,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"

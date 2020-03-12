@@ -29,8 +29,10 @@ function Alert(props) {
 const ApplyLeave = () => {
   const [leaveType, setLeaveType] = useState("");
   const [dayType, setDayType] = useState("");
+  const [warningMsg,setWarningMsg]=useState("");
   const inputLabel = useRef(null);
   const [Snackopen, setSnackOpen] = useState(false);
+  const [warningOpen, setWarningOpen] = useState(false);
   const handleTypeChange = event => {
     setLeaveType(event.target.value);
   };
@@ -51,11 +53,33 @@ const ApplyLeave = () => {
   const handleToDateChange = date => {
     setToDate(date);
   };
+  const handleSubmit=(event)=>{
+    event.preventDefault()
+    let obj={
+      startDate: fromDate.toISOString(),
+      endDate: toDate.toISOString(),
+      leaveType: leaveType,
+      halfDay:dayType,
+      description:event.currentTarget.elements.description.value
+    }
+    if(dayType===""){
+      setWarningMsg("Select Day type")
+      setWarningOpen("open")
+    }else{
+      if(leaveType===""){
+        setWarningMsg("Select Leave Type")
+        setWarningOpen("open")
+      }else{
+        setSnackOpen(true)
+      }
+    }
+    
+  }
   return (
     <div style={{ height: "90vh", boxSizing: "border-box", padding: "5px" }}>
       <Container>
         <Paper elevation={1} style={{ padding: "1.5rem", width: "60vw" }}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={3}>
                 <FormLabel>Leave Date</FormLabel>
@@ -143,6 +167,7 @@ const ApplyLeave = () => {
                 <TextField
                   id="description"
                   label="Description"
+                  name="description"
                   multiline
                   rows="4"
                   placeholder="Enter description..."
@@ -168,7 +193,7 @@ const ApplyLeave = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} align="center" style={{ paddingTop: "50px" }}>
-              <Button variant="contained" color="primary" onClick={()=>{setSnackOpen(true)}}>
+              <Button type="submit" variant="contained" color="primary">
                 Submit
               </Button>
               <CancelButton variant="contained">Cancel</CancelButton>
@@ -177,11 +202,20 @@ const ApplyLeave = () => {
         </Paper>
         <Snackbar
           open={Snackopen}
-          autoHideDuration={6000}
+          autoHideDuration={1500}
           onClose={handleSnackClose}
         >
           <Alert onClose={handleSnackClose} severity="success">
             Leave Applied
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={warningOpen}
+          autoHideDuration={1500}
+          onClose={()=>{setWarningOpen(false)}}
+        >
+          <Alert onClose={()=>{setWarningOpen(false)}} severity="error">
+            {warningMsg}
           </Alert>
         </Snackbar>
       </Container>
